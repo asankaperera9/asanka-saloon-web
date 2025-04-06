@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perera Salon - Luxury Beauty Experience</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- P5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    
+    <!-- Framer Motion for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/4.1.17/framer-motion.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-opacity-80 bg-black/50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-white">Perera Salon</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#services" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="#team" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                        <a href="#contact" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative h-screen flex items-center justify-center">
+        <canvas id="hero-canvas"></canvas>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-white">Transform Your Beauty</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-200">
+                Elevate your style with our expert beauty professionals. Personalized care, exceptional results.
+            </p>
+            <div class="space-x-4">
+                <a href="#services" class="inline-block bg-pink-600 text-white px-8 py-3 rounded-full hover:bg-pink-700 transition duration-300 transform hover:scale-105">
+                    Explore Services
+                </a>
+                <a href="#contact" class="inline-block border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300">
+                    Book Consultation
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8 text-pink-400">Our Story</h2>
+            <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-gray-300">
+                Founded in 2010, Perera Salon has been at the forefront of beauty innovation. Our team of passionate professionals combines artistic vision with technical expertise to create transformative experiences. We believe in more than just beauty treatments – we create moments of self-care and confidence.
+            </p>
+            <div class="mt-12 grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-pink-400">Our Mission</h3>
+                    <p class="text-gray-300">Empower individuals through personalized beauty experiences that enhance natural beauty and boost confidence.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-pink-400">Our Approach</h3>
+                    <p class="text-gray-300">Combining cutting-edge techniques with holistic care to deliver exceptional, tailored beauty solutions.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-pink-400">Our Promise</h3>
+                    <p class="text-gray-300">Commitment to quality, innovation, and creating a welcoming environment for every client.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-pink-400">Our Services</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-5xl mb-6 text-pink-400">💇‍♀️</div>
+                    <h3 class="text-2xl font-semibold mb-4">Hair Styling</h3>
+                    <p class="text-gray-300 mb-4">
+                        Customized cuts, colors, and treatments that bring out your unique style and personality.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>Precision Cutting</li>
+                        <li>Color Transformation</li>
+                        <li>Styling & Blowouts</li>
+                    </ul>
+                </div>
+                <div class="service-card bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-5xl mb-6 text-pink-400">💆‍♀️</div>
+                    <h3 class="text-2xl font-semibold mb-4">Skin Care</h3>
+                    <p class="text-gray-300 mb-4">
+                        Advanced facial treatments designed to rejuvenate, hydrate, and illuminate your skin.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>Deep Cleansing</li>
+                        <li>Anti-Aging Treatments</li>
+                        <li>Hydration Therapy</li>
+                    </ul>
+                </div>
+                <div class="service-card bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-5xl mb-6 text-pink-400">💅</div>
+                    <h3 class="text-2xl font-semibold mb-4">Nail Art</h3>
+                    <p class="text-gray-300 mb-4">
+                        Creative nail designs and premium manicure and pedicure services for stunning results.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>Classic Manicures</li>
+                        <li>Nail Art Design</li>
+                        <li>Gel & Acrylic Extensions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-pink-400">Our Experts</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-700 p-6 rounded-lg text-center">
+                    <div class="w-48 h-48 mx-auto mb-6 bg-gray-600 rounded-full"></div>
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Emily Rodriguez</h3>
+                    <p class="text-gray-300 mb-4">Lead Hair Stylist</p>
+                    <p class="text-gray-400 text-sm">10+ years of experience in high-end hair styling and color techniques.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg text-center">
+                    <div class="w-48 h-48 mx-auto mb-6 bg-gray-600 rounded-full"></div>
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Michael Chen</h3>
+                    <p class="text-gray-300 mb-4">Skin Care Specialist</p>
+                    <p class="text-gray-400 text-sm">Expert in advanced skincare treatments and holistic beauty approaches.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg text-center">
+                    <div class="w-48 h-48 mx-auto mb-6 bg-gray-600 rounded-full"></div>
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Sarah Thompson</h3>
+                    <p class="text-gray-300 mb-4">Nail Art Designer</p>
+                    <p class="text-gray-400 text-sm">Renowned for creative and intricate nail art designs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-pink-400">Book Your Experience</h2>
+            <form class="bg-gray-800 p-8 rounded-lg">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Name</label>
+                        <input type="text" class="w-full bg-gray-700 text-white p-3 rounded-md" placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Email</label>
+                        <input type="email" class="w-full bg-gray-700 text-white p-3 rounded-md" placeholder="Your Email">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <label class="block text-gray-300 mb-2">Service</label>
+                    <select class="w-full bg-gray-700 text-white p-3 rounded-md">
+                        <option>Select a Service</option>
+                        <option>Hair Styling</option>
+                        <option>Skin Care</option>
+                        <option>Nail Art</option>
+                    </select>
+                </div>
+                <div class="mt-6">
+                    <label class="block text-gray-300 mb-2">Message</label>
+                    <textarea class="w-full bg-gray-700 text-white p-3 rounded-md" rows="4" placeholder="Your message or booking details"></textarea>
+                </div>
+                <div class="mt-6 text-center">
+                    <button type="submit" class="bg-pink-600 text-white px-10 py-3 rounded-full hover:bg-pink-700 transition duration-300">
+                        Book Appointment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-white">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+            </div>
+            <p class="text-gray-500">&copy; 2025 Perera Salon. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Background Script -->
+    <script>
+        // Three.js Particle Background
+        function createParticleBackground() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('hero-canvas'), alpha: true });
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+
+            camera.position.z = 5;
+
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 5000;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 20;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            // Particle material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.005,
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.5
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                particlesMesh.rotation.x += 0.0005;
+                particlesMesh.rotation.y += 0.0005;
+
+                renderer.render(scene, camera);
+            }
+
+            // Resize handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animate();
+        }
+
+        // P5.js Interactive Text Effect
+        function createInteractiveText() {
+            let font;
+            let points = [];
+            let noiseScale = 0.005;
+
+            function preload() {
+                font = loadFont('https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js'); // Note: This is a placeholder
+            }
+
+            function setup() {
+                const canvas = createCanvas(windowWidth, 200);
+                canvas.parent('hero-text-effect');
+                textFont(font);
+                textSize(100);
+                fill(255);
+                noStroke();
+                
+                const txt = 'Perera Salon';
+                points = font.textToPoints(txt, width/2 - textWidth(txt)/2, height/2, 100);
+            }
+
+            function draw() {
+                clear();
+                for (let point of points) {
+                    const n = noise(point.x * noiseScale, point.y * noiseScale);
+                    const a = TWO_PI * n;
+                    const r = 5 * n;
+                    
+                    const x = point.x + r * cos(a);
+                    const y = point.y + r * sin(a);
+                    
+                    ellipse(x, y, 3, 3);
+                }
+            }
+
+            function windowResized() {
+                resizeCanvas(windowWidth, 200);
+            }
+        }
+
+        // Initialize background effects
+        window.addEventListener('load', () => {
+            createParticleBackground();
+            // Uncomment the following line once font loading is resolved
+            // createInteractiveText();
+        });
+    </script>
+</body>
+</html>
